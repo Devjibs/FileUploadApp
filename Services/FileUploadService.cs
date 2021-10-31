@@ -34,13 +34,13 @@ namespace UploadApp.Services
             using (var connection = new SqlConnection(_option.Value.DefaultConnection))
             {
                 await connection.OpenAsync();
-                await connection.ExecuteAsync("uspUpload", new {
+                int result = await connection.ExecuteAsync("uspUpload", new {
                     filename = image.FileName, filetype = image.FileType, imageData = Convert.ToBase64String(imageData)
                 }, commandType: CommandType.StoredProcedure);
 
                 await connection.CloseAsync();
                 connection.Dispose();
-                return (int)connection.State;
+                return result;
             }
         }
     }
