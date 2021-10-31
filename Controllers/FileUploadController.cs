@@ -27,9 +27,8 @@ namespace UploadApp.Controllers
         {
             try
             {
-                var imageupload = await _fileUploadService.UploadFile(
-                    imageFile, image);
-                if (image== null)
+                var imageupload = await _fileUploadService.UploadFile(imageFile, image);
+                if (imageupload < 1)
                 {
                     return new ErrorModel { ErrMessage = "Unable to upload your Image", Status = imageupload };
                 }
